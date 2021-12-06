@@ -58,16 +58,23 @@ public:
 	}
 
 	void render() {
+		GLfloat mat[4];
+
 		if (this->visited && this->valid) {
-			glColor3ub(0, 200, 80);
+			mat[0] = 0; mat[1] = 200.0f / 255.0f; mat[2] = 80.0f / 255.0f; mat[3] = 1.0;
 		}
 		else if(!this->valid && this->visited) {
-			glColor3ub(255, 0, 0);
+			mat[0] = 1; mat[1] = 0; mat[2] = 0; mat[3] = 1.0;
+
 		}
 		else {
-			glColor3ub(200, 0, 200);
+			mat[0] = 200.0f / 255.0f ; mat[1] = 0; mat[2] = 200.0f / 255.0f; mat[3] = 1.0;
 		}
 		
+		glPushMatrix();
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, mat);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, mat);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, mat);
 		glLineWidth(5);
 		glBegin(GL_LINES);
 		
@@ -75,6 +82,7 @@ public:
 		glVertex3f(this->to->getX(), this->to->getY(), this->to->getZ());
 		
 		glEnd();
+		glPopMatrix();
 	}
 };
 

@@ -11,7 +11,12 @@ int WINDOW_HEIGHT = 500;
 int RENDER_INTERVAL = 800;
 
 void drawGround() {
-	glColor3f(0.9f, 0.9f, 0.9f);
+	GLfloat mat[4];
+	mat[0] = 0.9f; mat[1] = 0.9f; mat[2] = 0.9f; mat[3] = 1.0f;
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, mat);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat);
+
 	glBegin(GL_QUADS);
 	glVertex3f(-100.0f, 0.0f, -100.0f);
 	glVertex3f(-100.0f, 0.0f, 100.0f);
@@ -81,6 +86,8 @@ int main(int argc, char** argv)
 	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	
 	glEnable(GL_DEPTH_TEST); // 3D Space
+
+	initLighting();
 
 	// OpenGL Main Event Loop
 	glutMainLoop();

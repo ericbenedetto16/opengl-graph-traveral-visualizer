@@ -1,5 +1,8 @@
 #pragma once
 
+#include<iostream>
+#include<GL/glut.h>
+
 class GraphEdge;
 
 class GraphNode {
@@ -56,14 +59,17 @@ public:
 	}
 
 	void render() {
+		GLfloat mat[4];
+
 		if (this->visited) {
-			glColor3ub(0, 255, 0);
+			mat[0] = 0; mat[1] = 255.0f / 255.0f; mat[2] = 0; mat[3] = 1.0;
 		}
 		else {
-			glColor3ub(0, 200, 200);
+			mat[0] = 0; mat[1] = 200.0f / 255.0f; mat[2] = 200.0f / 255.0f; mat[3] = 1.0;
 		}
 		
 		glPushMatrix();
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, mat);
 		glTranslatef(this->x, this->y, this->z);
 		glutSolidSphere(2.0f, 40, 40);
 		glPopMatrix();

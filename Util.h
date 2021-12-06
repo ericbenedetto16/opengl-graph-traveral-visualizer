@@ -236,3 +236,25 @@ void changeSize(int w, int h)
 	// Get Back to the Modelview
 	glMatrixMode(GL_MODELVIEW);
 }
+
+void initLighting() {
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_NORMALIZE);
+
+	GLfloat lightPosition[] = { 0.0f, 2.0f, 5.0f, 0.0f };
+	GLfloat lightIntensity[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat ambientLightIntensity[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightIntensity);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, lightIntensity);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLightIntensity);
+
+	GLfloat mat_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat mat_shininess[] = { 90.0f };
+	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+}
